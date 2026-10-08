@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- Wait for Spotify's React and ReactJSX runtime before constructing the profile menu. This fixes a startup exception that prevented lyric conversion and toggle registration in live Spotify.
+- Add a regression test for delayed runtime availability.
+
 ## 1.0.0
 
 - Single-file extension with locally bundled Japanese conversion libraries.

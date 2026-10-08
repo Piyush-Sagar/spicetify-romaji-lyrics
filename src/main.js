@@ -31,7 +31,10 @@ import { LyricsController } from "./controller.js";
   function init() {
     if (disposed) return;
     api = window.Spicetify;
-    if (!document.body || !api?.Player?.addEventListener || !api?.Menu?.Item) {
+    // Menu constructors exist before Spotify exposes their React dependencies.
+    // ContextMenuV2-based Menu.Item immediately calls ReactJSX.jsx in its constructor.
+    if (!document.body || !api?.Player?.addEventListener || !api?.Menu?.Item ||
+        !api?.React?.createElement || (api.ContextMenuV2 && !api.ReactJSX?.jsx)) {
       if (++attempts < 150) retryTimer = setTimeout(init, 200);
       else console.warn("[Romaji Lyrics] Spicetify did not become ready; reload Spotify to retry.");
       return;

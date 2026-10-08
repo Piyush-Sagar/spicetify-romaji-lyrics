@@ -1,4 +1,4 @@
-// Romaji Lyrics v1.0.0 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
+// Romaji Lyrics v1.0.1 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
 // Bundled third-party code: see THIRD_PARTY_NOTICES.md and licenses/.
 /*!
 --- doublearray-LICENSE.txt ---
@@ -4229,7 +4229,7 @@ SOFTWARE.
     function init() {
       if (disposed) return;
       api = window.Spicetify;
-      if (!document.body || !api?.Player?.addEventListener || !api?.Menu?.Item) {
+      if (!document.body || !api?.Player?.addEventListener || !api?.Menu?.Item || !api?.React?.createElement || api.ContextMenuV2 && !api.ReactJSX?.jsx) {
         if (++attempts < 150) retryTimer = setTimeout(init, 200);
         else console.warn("[Romaji Lyrics] Spicetify did not become ready; reload Spotify to retry.");
         return;

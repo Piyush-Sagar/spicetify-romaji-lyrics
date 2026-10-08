@@ -85,6 +85,7 @@
     deregister() { this.element.remove(); }
   }
   window.Spicetify = {
+    React: { createElement() {} },
     Player: {
       addEventListener: (type, listener) => testState.songListeners.add(listener),
       removeEventListener: (type, listener) => testState.songListeners.delete(listener),
