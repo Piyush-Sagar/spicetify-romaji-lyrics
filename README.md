@@ -24,7 +24,7 @@ Open **Marketplace → Extensions**, search for **Romaji Lyrics**, install it an
 ### Manual installation
 
 1. Download [romaji_lyrics.js](https://raw.githubusercontent.com/Piyush-Sagar/spicetify-romaji-lyrics/main/romaji_lyrics.js) (use **Save link as**, keeping the `.js` extension).
-2. Run `spicetify path` to find your configuration directory. Copy the file into its `Extensions` subfolder. Create that subfolder if needed. The directory can vary by installation; use the command's output.
+2. Run `spicetify path userdata` to find your configuration directory. Copy the file into its `Extensions` subfolder. Create that subfolder if needed. The directory can vary by installation; use the command's output.
 3. Enable and apply it:
 
 ```sh
