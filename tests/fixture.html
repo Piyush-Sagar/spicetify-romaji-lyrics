@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Romaji Lyrics — integration demo</title>
+<style>
+  * { box-sizing: border-box; }
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0c1015; color: #f5f7fa; font: 16px/1.5 "Segoe UI", sans-serif; }
+  .app { height: 720px; display: grid; grid-template-columns: 220px 1fr; grid-template-rows: 1fr 92px; }
+  aside { background: #10161d; padding: 36px 28px; border-right: 1px solid #26303b; }
+  .mark { width: 48px; height: 48px; border-radius: 14px; background: #b8ee7c; color: #132214; display: grid; place-items: center; font-size: 26px; font-weight: 700; }
+  aside h2 { margin: 20px 0 8px; font-size: 23px; letter-spacing: -.8px; }
+  .muted { color: #a7b1bd; }
+  .nav { margin-top: 58px; border-radius: 8px; padding: 11px 14px; background: #233127; color: #c0ee9a; font-weight: 600; }
+  aside p { font-size: 13px; margin-top: 24px; }
+  main { padding: 38px 56px; background: radial-gradient(ellipse at top right, #25403466, transparent 70%); }
+  .eyebrow { font-size: 11px; letter-spacing: 2px; color: #b8ee7c; font-weight: 700; }
+  h1 { font-size: 42px; line-height: 1.1; letter-spacing: -1.6px; margin: 14px 0 12px; }
+  .sub { margin: 0; color: #a7b1bd; }
+  .lyric-panel { margin-top: 42px; padding: 30px 34px; background: #ffffff05; border: 1px solid #ffffff12; border-radius: 16px; }
+  .line { font-size: 29px; font-weight: 650; letter-spacing: -.4px; margin: 10px 0; color: #a2afba; }
+  .line:first-child { color: #b8ee7c; }
+  .original { margin-top: 26px; display: flex; gap: 22px; align-items: center; }
+  .original span { color: #91a09f; font-size: 11px; letter-spacing: 1.3px; }
+  .original p { margin: 0; color: #adb7c2; font-size: 16px; }
+  .features { margin-top: 28px; display: flex; gap: 28px; color: #bdc8ce; font-size: 13px; }
+  .features b { color: #b8ee7c; margin-right: 6px; }
+  footer { grid-column: 1 / -1; background: #11181f; border-top: 1px solid #26303b; display: flex; align-items: center; justify-content: space-between; padding: 18px 30px; }
+  .demo { font-size: 12px; color: #a7b1bd; }
+  .demo strong { display: block; color: #edf2f4; font-size: 15px; margin-bottom: 4px; }
+  #playbar { display: flex; gap: 12px; align-items: center; }
+  button { border: 1px solid #536655; color: #c9eca8; background: #223128; border-radius: 25px; padding: 10px 18px; cursor: pointer; font: 600 13px "Segoe UI", sans-serif; display: flex; align-items: center; gap: 10px; }
+  button.off { color: #a7b1bd; background: #1b232c; border-color: #394652; }
+  #notifications { font-size: 12px; color: #a7b1bd; }
+</style>
+<div class="app">
+  <aside>
+    <div class="mark">あ</div>
+    <h2>Romaji<br>Lyrics</h2>
+    <div class="muted">Read it. Sing it.</div>
+    <div class="nav">♫ &nbsp; Lyrics</div>
+    <p class="muted">Japanese pronunciation,<br>right where you listen.</p>
+  </aside>
+  <main>
+    <div class="eyebrow">SPICETIFY EXTENSION</div>
+    <h1>Japanese lyrics, in romaji.</h1>
+    <p class="sub">Follow the words. Keep the rhythm.</p>
+    <div class="lyric-panel">
+      <div class="line C8vlCbXzAR7qEMsoQG1r">夜空に小さな光を描こう</div>
+      <div class="line C8vlCbXzAR7qEMsoQG1r">新しい朝へ歩いていこう</div>
+      <div class="line C8vlCbXzAR7qEMsoQG1r">こんにちは Hello</div>
+      <div class="original"><span>ORIGINAL</span><p>夜空に小さな光を描こう</p></div>
+    </div>
+    <div class="features"><span><b>✓</b> Converts locally</span><span><b>✓</b> Keeps lyrics synced</span><span><b>✓</b> Switch back anytime</span></div>
+  </main>
+  <footer>
+    <div class="demo"><strong>Read Japanese. Follow along.</strong>DEMONSTRATION · ORIGINAL SAMPLE TEXT · SIMULATED SPICETIFY UI</div>
+    <div id="notifications" role="status"></div>
+    <div id="playbar"></div>
+  </footer>
+</div>
+<script>
+  // Minimal test double for documented Spicetify integration APIs.
+  window.testState = { menus: [], songListeners: new Set(), notifications: [] };
+  class MenuItem {
+    constructor(name, enabled, onClick) { this.name = name; this.isEnabled = enabled; this.onClick = onClick; }
+    register() { testState.menus.push(this); }
+    deregister() { testState.menus = testState.menus.filter(item => item !== this); }
+    setState(enabled) { this.isEnabled = enabled; }
+  }
+  class PlaybarButton {
+    constructor(label, icon, onClick, disabled, active) {
+      this.element = document.createElement("button");
+      this.element.id = "romaji-toggle";
+      this.element.innerHTML = icon;
+      this.text = document.createElement("span");
+      this.element.append(this.text);
+      this.label = label;
+      this.active = active;
+      this.element.onclick = onClick;
+      document.querySelector("#playbar").append(this.element);
+    }
+    set label(value) { this.text.textContent = value; this.element.setAttribute("aria-label", value); }
+    set active(value) { this.element.classList.toggle("off", !value); this.element.setAttribute("aria-pressed", String(value)); }
+    deregister() { this.element.remove(); }
+  }
+  window.Spicetify = {
+    Player: {
+      addEventListener: (type, listener) => testState.songListeners.add(listener),
+      removeEventListener: (type, listener) => testState.songListeners.delete(listener),
+    },
+    Menu: { Item: MenuItem }, Playbar: { Button: PlaybarButton },
+    LocalStorage: { get: key => localStorage.getItem(key), set: (key, value) => localStorage.setItem(key, value) },
+    showNotification: message => { testState.notifications.push(message); },
+  };
+</script>
+<script src="/romaji_lyrics.js"></script>
+</html>
