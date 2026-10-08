@@ -1,5 +1,5 @@
 {
-  "name": "Romaji Lyrics",
+  "name": "Japanese to Romaji Lyrics 2026 Working",
   "description": "Read Japanese lyrics in romaji. Converts locally, preserves synced lyrics, and lets you switch back to Japanese.",
   "preview": "assets/preview.png",
   "main": "romaji_lyrics.js",
