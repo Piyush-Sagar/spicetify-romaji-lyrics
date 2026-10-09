@@ -1,4 +1,4 @@
-// Romaji Lyrics v1.0.1 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
+// Romaji Lyrics v1.0.2 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
 // Bundled third-party code: see THIRD_PARTY_NOTICES.md and licenses/.
 /*!
 --- doublearray-LICENSE.txt ---
@@ -4074,6 +4074,7 @@ SOFTWARE.
   var LYRIC_SELECTOR = [
     ".lyrics-lyricsContent-text",
     ".C8vlCbXzAR7qEMsoQG1r",
+    ".LFG5utG7LPiCVtel1IZQ",
     '[data-testid="lyrics-line"]',
     '[data-testid="lyrics-line-always-visible"]',
     '[data-testid="lyrics-line-collapsible"]'

@@ -1,5 +1,7 @@
 # Release validation
 
+Version 1.0.2 checked on 9 October 2026: build, all 17 regression tests, and Marketplace asset validation passed. The additional test covers Spotify 1.3.4's primary lyric class, Japanese restoration, and unchanged translations and controls. The real-CDN Chromium integration also passed with all 12 integrity-checked dictionaries and no browser errors.
+
 Validated on 8 October 2026 for version 1.0.1.
 
 | Check | Result |

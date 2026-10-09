@@ -1,8 +1,9 @@
-// Native Spotify layouts: legacy, test IDs, and the primary text class in 1.3.3.
+// Native Spotify layouts: legacy, test IDs, and primary text classes in 1.3.3/1.3.4.
 // Keep these adapters explicit: broad [class*="lyrics"] selectors alter controls.
 export const LYRIC_SELECTOR = [
   ".lyrics-lyricsContent-text",
   ".C8vlCbXzAR7qEMsoQG1r",
+  ".LFG5utG7LPiCVtel1IZQ",
   '[data-testid="lyrics-line"]',
   '[data-testid="lyrics-line-always-visible"]',
   '[data-testid="lyrics-line-collapsible"]',

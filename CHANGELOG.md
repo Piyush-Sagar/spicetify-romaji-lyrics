@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+
+- Support Spotify 1.3.4's renamed primary lyric text element in native previews and full lyrics.
+- Add a regression check for conversion and original restoration while preserving translations and controls.
+
 ## 1.0.1
 
 - Wait for Spotify's React and ReactJSX runtime before constructing the profile menu. This fixes a startup exception that prevented lyric conversion and toggle registration in live Spotify.

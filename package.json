@@ -1,6 +1,6 @@
 {
   "name": "spicetify-romaji-lyrics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "description": "Local Japanese lyric romanization for Spicetify",
   "license": "MIT",

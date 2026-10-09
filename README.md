@@ -43,7 +43,7 @@ The first Japanese track downloads approximately 17 MB of compressed dictionary 
 ## Compatibility and limitations
 
 - This extension converts lyrics Spotify already displays. It does not retrieve missing lyrics or bypass Spotify's lyrics availability restrictions.
-- Supports the legacy `.lyrics-lyricsContent-text` layout, explicit lyric test IDs, and Spotify 1.3.3's primary lyric text class. Spotify can change these internal selectors in later releases; report unsupported layouts through [Issues](https://github.com/Piyush-Sagar/spicetify-romaji-lyrics/issues).
+- Supports the legacy `.lyrics-lyricsContent-text` layout, explicit lyric test IDs, and Spotify 1.3.3/1.3.4 primary lyric text classes. Spotify can change these internal selectors in later releases; report unsupported layouts through [Issues](https://github.com/Piyush-Sagar/spicetify-romaji-lyrics/issues).
 - Third-party lyrics extensions, iframe content and word-by-word romanization are not guaranteed. Nested word elements retain their structure, but converting separate text nodes can lose sentence context.
 - Dictionary readings can be wrong for names, unusual kanji, poetic readings and lyrics with nonstandard pronunciations. Romaji is a reading aid, not an English translation.
 - Han characters are shared by Japanese and Chinese. The extension cannot reliably distinguish kanji-only Japanese lines from Chinese; switch it off for Chinese lyrics.

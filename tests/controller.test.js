@@ -43,6 +43,16 @@ test("preserves nested word elements, event listeners, and literal HTML characte
   assert.match(document.querySelector('[data-testid="lyrics-line"]').textContent, / world$/);
 });
 
+test("converts Spotify 1.3.4 primary lyrics without changing translations or controls", async t => {
+  const { document, controller } = setup(t, '<div class="VJ82jCGUtjX3d2YQSiFA"><div class="LFG5utG7LPiCVtel1IZQ">こんにちは</div><div class="S4tQBGGEn6i06MmrSnla">翻訳</div></div><button>日本語</button>');
+  await tick();
+  assert.equal(document.querySelector(".LFG5utG7LPiCVtel1IZQ").textContent, "konnichiwa");
+  assert.equal(document.querySelector(".S4tQBGGEn6i06MmrSnla").textContent, "翻訳");
+  assert.equal(document.querySelector("button").textContent, "日本語");
+  controller.setEnabled(false);
+  assert.equal(document.querySelector(".LFG5utG7LPiCVtel1IZQ").textContent, "こんにちは");
+});
+
 test("observes panels mounted later and text-node updates during playback", async t => {
   const { document } = setup(t, "", async text => `romaji:${text}`);
   const line = document.createElement("div");
