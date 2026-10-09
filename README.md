@@ -47,7 +47,7 @@ The first Japanese track downloads approximately 17 MB of compressed dictionary 
 - Third-party lyrics extensions, iframe content and word-by-word romanization are not guaranteed. Nested word elements retain their structure, but converting separate text nodes can lose sentence context.
 - Dictionary readings can be wrong for names, unusual kanji, poetic readings and lyrics with nonstandard pronunciations. Romaji is a reading aid, not an English translation.
 - Han characters are shared by Japanese and Chinese. The extension cannot reliably distinguish kanji-only Japanese lines from Chinese; switch it off for Chinese lyrics.
-- The release is checked with real Kuromoji dictionaries, DOM regression tests and a Chromium integration harness. Version 1.0.1 was also verified in authenticated Spotify Desktop: native preview and full-page conversion, Japanese restoration from the playback-bar toggle, and conversion during playback.
+- The release is checked with real Kuromoji dictionaries, DOM regression tests and a Chromium integration harness. Version 1.0.2 was also verified in authenticated Spotify 1.3.4: native preview and full-page conversion, Japanese restoration from the profile-menu toggle, and re-enabling romaji.
 
 ## Privacy and network access
 

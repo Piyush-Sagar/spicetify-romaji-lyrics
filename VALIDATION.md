@@ -2,6 +2,8 @@
 
 Version 1.0.2 checked on 9 October 2026: build, all 17 regression tests, and Marketplace asset validation passed. The additional test covers Spotify 1.3.4's primary lyric class, Japanese restoration, and unchanged translations and controls. The real-CDN Chromium integration also passed with all 12 integrity-checked dictionaries and no browser errors.
 
+Authenticated Spotify 1.3.4.258 with Spicetify 2.45.3 was then verified on the user's second display: native lyric preview and full lyrics converted, the profile-menu toggle restored Japanese, and re-enabling restored romaji. A duplicate manual/Marketplace installation was identified and the manual entry was disabled, leaving the updated Marketplace copy active. Its CDN bytes matched the published bundle; the temporary diagnostic extension was removed after testing. No live song lyrics or account screenshots were published.
+
 Validated on 8 October 2026 for version 1.0.1.
 
 | Check | Result |
