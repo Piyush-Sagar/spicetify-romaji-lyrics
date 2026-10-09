@@ -1,5 +1,6 @@
 import { createRomanizer } from "./analyzer.js";
 import { LyricsController } from "./controller.js";
+import { createLyricsToggle } from "./toggle.js";
 
 (() => {
   "use strict";
@@ -20,7 +21,7 @@ import { LyricsController } from "./controller.js";
     clearTimeout(retryTimer);
     controller?.dispose();
     menu?.deregister();
-    button?.deregister();
+    button?.dispose();
     api?.Player?.removeEventListener?.("songchange", onSongChange);
     window.removeEventListener("pagehide", dispose);
     if (window[INSTANCE]?.dispose === dispose) delete window[INSTANCE];
@@ -59,17 +60,12 @@ import { LyricsController } from "./controller.js";
       controller.setEnabled(!controller.enabled);
       try { api.LocalStorage?.set(KEY, String(controller.enabled)); } catch { /* Session-only mode. */ }
       menu.setState(controller.enabled);
-      if (button) {
-        button.active = controller.enabled;
-        button.label = controller.enabled ? "Romaji Lyrics: on" : "Romaji Lyrics: off";
-      }
+      button?.update(controller.enabled);
       api.showNotification?.(`Romaji Lyrics: ${controller.enabled ? "on" : "off"}`);
     };
     menu = new api.Menu.Item("Romaji Lyrics", enabled, toggle, icon);
     menu.register();
-    if (api.Playbar?.Button) {
-      button = new api.Playbar.Button(enabled ? "Romaji Lyrics: on" : "Romaji Lyrics: off", icon, toggle, false, enabled);
-    }
+    button = createLyricsToggle({ document, enabled, onToggle: toggle, icon });
     api.Player.addEventListener("songchange", onSongChange);
     window.addEventListener("pagehide", dispose);
     controller.start();

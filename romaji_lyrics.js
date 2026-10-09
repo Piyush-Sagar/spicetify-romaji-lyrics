@@ -1,4 +1,4 @@
-// Romaji Lyrics v1.0.2 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
+// Romaji Lyrics v1.0.3 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
 // Bundled third-party code: see THIRD_PARTY_NOTICES.md and licenses/.
 /*!
 --- doublearray-LICENSE.txt ---
@@ -4200,6 +4200,50 @@ SOFTWARE.
     }
   };
 
+  // src/toggle.js
+  function createLyricsToggle({ document: document2, enabled, onToggle, icon }) {
+    const button = document2.createElement("button");
+    button.id = "romaji-toggle";
+    button.type = "button";
+    button.dataset.romajiIgnore = "";
+    button.style.cssText = "display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:0 0 auto;min-height:32px;padding:0 8px;margin-right:4px;border:1px solid currentColor;border-radius:16px;background:transparent;font-family:inherit;font-size:11px;font-weight:600;line-height:1.2;cursor:pointer;";
+    const glyph = document2.createElement("span");
+    glyph.setAttribute("aria-hidden", "true");
+    glyph.style.cssText = "display:flex;align-items:center;";
+    glyph.innerHTML = icon;
+    const label = document2.createElement("span");
+    button.append(glyph, label);
+    button.addEventListener("click", onToggle);
+    function update(isRomaji) {
+      label.textContent = isRomaji ? "Romaji" : "日本語";
+      const action = isRomaji ? "Show Japanese lyrics" : "Show romaji lyrics";
+      button.setAttribute("aria-label", action);
+      button.setAttribute("aria-pressed", String(isRomaji));
+      button.title = action;
+      button.style.color = isRomaji ? "var(--spice-button, #1ed760)" : "var(--spice-subtext, #b3b3b3)";
+    }
+    function mount() {
+      const bar = document2.querySelector('[data-testid="now-playing-bar"], .main-nowPlayingBar-nowPlayingBar, .n6XE6JL2UDeFogzbLcNC');
+      if (!bar) return;
+      const lyrics = bar.querySelector('button[data-testid="lyrics-button"]');
+      const host = lyrics?.parentElement ?? bar.querySelector(".main-nowPlayingBar-right > div");
+      if (!host || button.parentElement === host) return;
+      host.insertBefore(button, lyrics ?? host.firstChild);
+    }
+    update(enabled);
+    const observer = new document2.defaultView.MutationObserver(mount);
+    observer.observe(document2.body, { childList: true, subtree: true });
+    mount();
+    return {
+      update,
+      dispose() {
+        observer.disconnect();
+        button.removeEventListener("click", onToggle);
+        button.remove();
+      }
+    };
+  }
+
   // src/main.js
   (() => {
     "use strict";
@@ -4220,7 +4264,7 @@ SOFTWARE.
       clearTimeout(retryTimer);
       controller?.dispose();
       menu?.deregister();
-      button?.deregister();
+      button?.dispose();
       api?.Player?.removeEventListener?.("songchange", onSongChange);
       window.removeEventListener("pagehide", dispose);
       if (window[INSTANCE]?.dispose === dispose) delete window[INSTANCE];
@@ -4262,17 +4306,12 @@ SOFTWARE.
         } catch {
         }
         menu.setState(controller.enabled);
-        if (button) {
-          button.active = controller.enabled;
-          button.label = controller.enabled ? "Romaji Lyrics: on" : "Romaji Lyrics: off";
-        }
+        button?.update(controller.enabled);
         api.showNotification?.(`Romaji Lyrics: ${controller.enabled ? "on" : "off"}`);
       };
       menu = new api.Menu.Item("Romaji Lyrics", enabled, toggle, icon);
       menu.register();
-      if (api.Playbar?.Button) {
-        button = new api.Playbar.Button(enabled ? "Romaji Lyrics: on" : "Romaji Lyrics: off", icon, toggle, false, enabled);
-      }
+      button = createLyricsToggle({ document, enabled, onToggle: toggle, icon });
       api.Player.addEventListener("songchange", onSongChange);
       window.addEventListener("pagehide", dispose);
       controller.start();

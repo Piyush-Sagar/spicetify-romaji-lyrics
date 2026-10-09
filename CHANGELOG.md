@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- Restore a visible language toggle beside Spotify's native lyrics button on current player layouts.
+- Show `Romaji` or `日本語` for the current mode, with accessible switch labels and a saved preference shared with the profile menu.
+- Keep one toggle through player remounts and extension reloads.
+
 ## 1.0.2
 
 - Support Spotify 1.3.4's renamed primary lyric text element in native previews and full lyrics.
