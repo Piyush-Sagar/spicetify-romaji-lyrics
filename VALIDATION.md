@@ -1,8 +1,10 @@
 # Release validation
 
+Version 1.0.4 checked on 9 October 2026: all 19 regression tests, Marketplace asset validation, and the real-CDN Chromium integration passed. The icon-only button retains accessible action labels, saved preference, state color, and player remount/reload cleanup. The updated preview was visually reviewed.
+
 Version 1.0.3 checked on 9 October 2026: all 19 regression tests passed, including mounting the language toggle after the player appears, reattaching after player replacement, shared saved preference with the profile menu, and cleanup during bundle reload. The real-CDN Chromium integration passed with no browser errors, and the refreshed preview was visually reviewed.
 
-Live Spotify 1.3.4 on the user's second display showed the new player toggle beside the native lyrics button. Clicking `Romaji` restored Japanese and changed the button to `日本語`; clicking it again restored romaji. The toggle remained visible after the player window was resized. Marketplace assets and the installed entry were pinned to v1.0.3 after the mutable branch CDN returned older bundles despite cache purges. The release-specific CDN bundle matched the local SHA-256. The one-time update helper was removed after updating the existing entry.
+Live Spotify 1.3.4 on the user's second display showed the new player toggle beside the native lyrics button. Clicking `Romaji` restored Japanese and changed the button to `日本語`; browser tests verified the reverse switch. The final live reverse-switch check was stopped with the physical Escape key. The toggle remained visible after the player window was resized. Marketplace assets and the installed entry were pinned to v1.0.3 after the mutable branch CDN returned older bundles despite cache purges. The release-specific CDN bundle matched the local SHA-256. The one-time update helper was removed after updating the existing entry.
 
 Version 1.0.2 checked on 9 October 2026: build, all 17 regression tests, and Marketplace asset validation passed. The additional test covers Spotify 1.3.4's primary lyric class, Japanese restoration, and unchanged translations and controls. The real-CDN Chromium integration also passed with all 12 integrity-checked dictionaries and no browser errors.
 

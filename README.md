@@ -36,7 +36,7 @@ Spicetify's `config extensions` command appends to the enabled extensions. If yo
 
 ## Use
 
-Play a Japanese track and open Spotify's lyrics. The extension starts enabled. Click **Romaji** beside Spotify's lyrics button to show the original Japanese; the toggle then reads **日本語**. Click **日本語** to switch back to romaji. Your choice is saved between sessions. You can also toggle **Romaji Lyrics** in your profile menu; both controls stay in sync.
+Play a Japanese track and open Spotify's lyrics. The extension starts enabled. Click the **translate icon** beside Spotify's lyrics button to switch between romaji and Japanese. The icon is green when romaji is enabled and gray for Japanese; hover over it to see which language clicking will show. Your choice is saved between sessions. You can also toggle **Romaji Lyrics** in your profile menu; both controls stay in sync.
 
 The first Japanese track downloads approximately 17 MB of compressed dictionary data. Downloads use the browser's normal HTTP cache; the initialized dictionary stays in memory until Spotify reloads. Subsequent tracks in that session use the same dictionary.
 

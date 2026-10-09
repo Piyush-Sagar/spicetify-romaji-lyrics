@@ -1,4 +1,4 @@
-// Romaji Lyrics v1.0.3 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
+// Romaji Lyrics v1.0.4 | MIT | https://github.com/Piyush-Sagar/spicetify-romaji-lyrics
 // Bundled third-party code: see THIRD_PARTY_NOTICES.md and licenses/.
 /*!
 --- doublearray-LICENSE.txt ---
@@ -4206,16 +4206,14 @@ SOFTWARE.
     button.id = "romaji-toggle";
     button.type = "button";
     button.dataset.romajiIgnore = "";
-    button.style.cssText = "display:inline-flex;align-items:center;justify-content:center;gap:5px;flex:0 0 auto;min-height:32px;padding:0 8px;margin-right:4px;border:1px solid currentColor;border-radius:16px;background:transparent;font-family:inherit;font-size:11px;font-weight:600;line-height:1.2;cursor:pointer;";
+    button.style.cssText = "display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:32px;height:32px;padding:0;margin-right:4px;border:0;border-radius:50%;background:transparent;cursor:pointer;";
     const glyph = document2.createElement("span");
     glyph.setAttribute("aria-hidden", "true");
     glyph.style.cssText = "display:flex;align-items:center;";
     glyph.innerHTML = icon;
-    const label = document2.createElement("span");
-    button.append(glyph, label);
+    button.append(glyph);
     button.addEventListener("click", onToggle);
     function update(isRomaji) {
-      label.textContent = isRomaji ? "Romaji" : "日本語";
       const action = isRomaji ? "Show Japanese lyrics" : "Show romaji lyrics";
       button.setAttribute("aria-label", action);
       button.setAttribute("aria-pressed", String(isRomaji));

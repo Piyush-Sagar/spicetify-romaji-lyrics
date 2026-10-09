@@ -17,12 +17,12 @@ test("toggle mounts next to lyrics when the player appears and survives player r
     await tick();
     const button = document.querySelector("#romaji-toggle");
     assert.equal(button.nextElementSibling.dataset.testid, "lyrics-button");
-    assert.equal(button.textContent, "Romaji");
+    assert.equal(button.textContent, "");
     assert.equal(button.getAttribute("aria-label"), "Show Japanese lyrics");
     button.click();
     assert.equal(clicks, 1);
     toggle.update(false);
-    assert.equal(button.textContent, "日本語");
+    assert.equal(button.getAttribute("aria-label"), "Show romaji lyrics");
     assert.equal(button.getAttribute("aria-pressed"), "false");
     document.body.innerHTML = player;
     await tick();
@@ -55,16 +55,16 @@ test("player and profile toggles share the saved preference and bundle reload ke
     const bundle = await readFile("romaji_lyrics.js", "utf8");
     window.eval(bundle);
     let button = window.document.querySelector("#romaji-toggle");
-    assert.equal(button.textContent, "日本語");
+    assert.equal(button.getAttribute("aria-label"), "Show romaji lyrics");
     button.click();
     assert.equal(saved.get("romaji-lyrics:enabled"), "true");
     assert.equal(menu.enabled, true);
     menu.click();
-    assert.equal(button.textContent, "日本語");
+    assert.equal(button.getAttribute("aria-label"), "Show romaji lyrics");
     assert.equal(saved.get("romaji-lyrics:enabled"), "false");
     window.eval(bundle);
     button = window.document.querySelector("#romaji-toggle");
     assert.equal(window.document.querySelectorAll("#romaji-toggle").length, 1);
-    assert.equal(button.textContent, "日本語");
+    assert.equal(button.getAttribute("aria-label"), "Show romaji lyrics");
   } finally { window.__spicetifyRomajiLyrics?.dispose(); window.close(); }
 });

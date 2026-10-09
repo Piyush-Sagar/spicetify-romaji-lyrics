@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Show only the translate icon in the player toggle, with a tooltip, accessible label, and green/gray state indication.
+
 ## 1.0.3
 
 - Restore a visible language toggle beside Spotify's native lyrics button on current player layouts.

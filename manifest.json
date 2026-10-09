@@ -3,7 +3,7 @@
   "description": "Read Japanese lyrics in romaji. Converts locally, preserves synced lyrics, and lets you switch back to Japanese.",
   "preview": "assets/preview.png",
   "main": "romaji_lyrics.js",
-  "branch": "v1.0.3",
+  "branch": "v1.0.4",
   "readme": "README.md",
   "authors": [{ "name": "Piyush Sagar", "url": "https://github.com/Piyush-Sagar" }],
   "tags": ["lyrics", "japanese", "romaji", "accessibility"]
